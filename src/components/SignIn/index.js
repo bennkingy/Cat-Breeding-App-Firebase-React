@@ -29,15 +29,15 @@ class SignInFormBase extends Component {
   }
 
   onSubmit = e => {
-		const {username, email, passwordOne } = this.state
+		const {email, password } = this.state
 		this.props.firebase 
-			.doSignInWithEmailAndPassword(email, passwordOne)
-			.then(authUser => {
-				this.setState({...INITIAL_STATE});
-				this.props.history.push(ROUTES.HOME)
-			})
+			.doSignInWithEmailAndPassword(email, password)
+			.then(() => {
+			  this.setState({...INITIAL_STATE});
+			  this.props.history.push(ROUTES.HOME);
+  			})
 			.catch(error => {
-				this.setState({ error });
+			  this.setState({ error });
 			})
 			e.preventDefault();
   }
