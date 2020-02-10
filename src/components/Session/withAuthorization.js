@@ -40,4 +40,4 @@ const withAuthorization = condition => Component => {
 
 };
 
-export default withAuthorization;
+export default withAuthorization;	
