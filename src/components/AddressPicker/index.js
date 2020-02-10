@@ -54,8 +54,10 @@ class AddressPicker extends React.Component {
       },
       error => {
         console.error(error);
-      }
-    );
+      }).then(() => {
+			  this.setState({loading:false, ...INITIAL_STATE});
+  		}
+    )
 
   }
 
@@ -64,14 +66,12 @@ class AddressPicker extends React.Component {
 	};
 
   onSubmit = e => {
-    e.preventDefault();
     this.gmapSetup();
     console.log('done');
-
-  //  this.props.firebase.database().ref('users/' + user.uid).set({
-  //    catLocation: catLocationLatLong,
- //   })
-
+    //  this.props.firebase.database().ref('users/' + user.uid).set({
+    //    catLocation: catLocationLatLong,
+    //  })
+    e.preventDefault();
 	};
 	
   render() {
