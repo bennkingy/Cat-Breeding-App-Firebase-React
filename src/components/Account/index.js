@@ -2,7 +2,6 @@ import React from 'react';
 import PasswordChangeForm from '../PasswordChange';
 import PasswordForgetForm from '../PasswordForget';
 import { withAuthorization, AuthUserContext } from '../Session';
-import AddressPicker from '../AddressPicker';
 
 const AccountPage = () => (
   <AuthUserContext.Consumer>
@@ -11,7 +10,6 @@ const AccountPage = () => (
 				<h1>Account: {authUser.email}</h1>
 				<PasswordChangeForm />
 				<PasswordForgetForm />
-				<AddressPicker />
 			</div>
 		)}
 	</AuthUserContext.Consumer>
