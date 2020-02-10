@@ -34,7 +34,7 @@ class AddressPicker extends React.Component {
   gmapSetup() {
 
     // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
-    Geocode.setApiKey("AIzaSyAxP7ju-r82o8qa7_2Q_97zNh4bYaas_0o");
+    Geocode.setApiKey(process.env.REACT_APP_GOOGLEKEY);
 
     // set response language. Defaults to english.
     Geocode.setLanguage("en");
