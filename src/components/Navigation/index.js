@@ -29,9 +29,11 @@ const NavigationAuth = ({ authUser }) => (
     <li>
       <Link to={ROUTES.ACCOUNT}>Account</Link>
     </li>
+    {!!authUser.roles[ROLES.ADMIN] && (
     <li>
       <Link to={ROUTES.ADMIN}>Admin</Link>
     </li>
+    )}
     <li>
       <SignOutButton />
     </li>
