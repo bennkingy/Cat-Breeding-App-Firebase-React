@@ -21,31 +21,23 @@ class AddressPicker extends React.Component {
     if (this.state.user) {
       return;
     }
-
     this.setState({ loading: true });
-
-    console.log(this.props.firebase);
   }
 
   componentWillUnmount() {
-    this.props.firebase.user(this.props.match.params.id).off();
+    //this.props.firebase.user(this.props.match.params.id).off();
   }
   
   gmapSetup() {
-
     // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
     Geocode.setApiKey(process.env.REACT_APP_GOOGLEKEY);
-
     // set response language. Defaults to english.
     Geocode.setLanguage("en");
-
     // set response region. Its optional.
     // A Geocoding request with region=es (Spain) will return the Spanish city.
     Geocode.setRegion("es");
-
     // Enable or disable logs. Its optional.
     Geocode.enableDebug();
-
     // Get latidude & longitude from address.
     Geocode.fromAddress(this.state.address).then(
       response => {
@@ -67,7 +59,6 @@ class AddressPicker extends React.Component {
 
   onSubmit = e => {
     this.gmapSetup();
-    console.log('done');
     //  this.props.firebase.database().ref('users/' + user.uid).set({
     //    catLocation: catLocationLatLong,
     //  })
