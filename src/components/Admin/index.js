@@ -78,6 +78,7 @@ class UserListBase extends React.Component {
 }
 
 class UserItemBase extends React.Component {
+
   constructor(props) {
 		super(props)
 		this.state = {
@@ -86,6 +87,7 @@ class UserItemBase extends React.Component {
       ...props.location.state
 		}
   }
+
   componentDidMount() {
     if (this.state.user) {
       return
@@ -98,9 +100,15 @@ class UserItemBase extends React.Component {
 			});
 		});
   } 
+
 	componentWillUnmount() {
 		this.props.firebase.user(this.props.match.params.id).off();
   }
+
+  onSendPasswordResetEmail = () => {
+    this.props.firebase.doPasswordReset(this.state.user.email);
+  }
+
   render() {
     const { user, loading } = this.state;
 
@@ -119,6 +127,14 @@ class UserItemBase extends React.Component {
             </span>
             <span>
               <strong>Username:</strong> {user.username}
+            </span>
+            <span>
+              <button
+                type="button"
+                onClick={this.onSendPasswordResetEmail}
+              >
+                Send Password reset
+              </button>
             </span>
           </div>
         )}
