@@ -49,6 +49,10 @@ class MessageBase extends React.Component {
     e.preventDefault();
   }
 
+  onRemoveMessage = uid => {
+    this.props.firebase.message(uid).remove();
+  }
+
   onChangeText = e => {
     this.setState({ text: e.target.value });
   };
@@ -64,7 +68,10 @@ class MessageBase extends React.Component {
         <div>
           {loading && <div>Loading ...</div>}
           {messages ? (
-          <MessageList messages={messages} />
+          <MessageList
+            messages={messages}
+            onRemoveMessage={this.onRemoveMessage}
+          />
           ) : (
             <div>There are no messages</div>
           )}
@@ -84,17 +91,22 @@ class MessageBase extends React.Component {
 
 }
 
-const MessageList = ({ messages}) => (
+const MessageList = ({ messages, onRemoveMessage }) => (
   <ul>
     {messages.map(message => (
-      <MessageItem key={message.uid} message={message} />
+      <MessageItem
+        key={message.uid}
+        message={message}
+        onRemoveMessage={onRemoveMessage}
+      />
     ))}
   </ul>
 )
 
-const MessageItem = ({ message }) => (
+const MessageItem = ({ message, onRemoveMessage }) => (
   <li>
     <strong>{message.userId}</strong> {message.text}
+    <button type="button" onClick={() => onRemoveMessage(message.uid)}>Delete</button>
   </li>
 )
 
