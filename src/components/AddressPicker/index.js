@@ -59,9 +59,6 @@ class AddressPicker extends React.Component {
 
   onSubmit = e => {
     this.gmapSetup();
-    //  this.props.firebase.database().ref('users/' + user.uid).set({
-    //    catLocation: catLocationLatLong,
-    //  })
     e.preventDefault();
 	};
 	
