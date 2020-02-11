@@ -84,7 +84,7 @@ const CatList = ({ cats }) => (
 
 const CatItem = ({ cat }) => (
   <li>
-    <strong>{cat.userId}</strong> {cat.text} <img src={cat.image ? cat.image : ''} width="200px" />
+    <strong>{cat.userId}</strong> {cat.text} {cat.address} <img src={cat.image} width="200px" />
   </li>
 )
 
