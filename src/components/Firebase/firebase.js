@@ -39,7 +39,7 @@ class Firebase {
   doPasswordUpdate = password =>
     this.auth.currentUser.updatePassword(password);
 
-  // Merge Auth and DB User API //
+  //  Auth and DB User API //
   onAuthUserListener = (next, fallback) =>
   this.auth.onAuthStateChanged(authUser => {
     if (authUser) {
@@ -73,7 +73,17 @@ class Firebase {
   user = uid => this.db.ref(`users/${uid}`);
 
   users = () => this.db.ref('users');
-  
+
+  // Message API //
+  message = uid => this.db.ref(`messages/${uid}`);
+
+  messages = uid => this.db.ref('messages');
+
+  // Cat API //
+  cat = uid => this.db.ref(`cats/${uid}`);
+
+  cats = () => this.db.ref('cats');
+   
 }
 
 export default Firebase;
