@@ -1,23 +1,52 @@
 import React from 'react';
 import { AuthUserContext, withAuthorization } from '../Session';
-import { withFirebase } from '../Firebase';
+import Geocode from "react-geocode";
+
+const INITIAL_STATE = {
+  text: '',
+  address: ''
+}
 
 class AddCat extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      text: ''
+      ...INITIAL_STATE
     }
   }
 
+  componentDidMount() {
+    // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
+    Geocode.setApiKey(process.env.REACT_APP_GOOGLEKEY);
+    // set response language. Defaults to english.
+    Geocode.setLanguage("en");
+    // set response region. Its optional.
+    // A Geocoding request with region=es (Spain) will return the Spanish city.
+    Geocode.setRegion("es");
+    // Enable or disable logs. Its optional.
+    Geocode.enableDebug();
+    // Get latidude & longitude from address.
+  }
+
   onCreateCat = (e, authUser) => {
-    this.props.firebase.cats().push({
-      text: this.state.text,
-      image: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9',
-      userId: authUser.uid
-    });
-    this.setState({ text: '' });
+    Geocode.fromAddress(this.state.address).then(
+      response => {
+        const { lat, lng } = response.results[0].geometry.location;
+        this.setState({address: lat + ',' + lng});
+      },
+      error => {
+        console.error(error);
+      }
+    )
+    .then(
+      this.props.firebase.cats().push({
+        text: this.state.text,
+        image: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9',
+        userId: authUser.uid,
+        address: this.state.address,
+      })
+    )
     e.preventDefault();
   }
 
@@ -25,28 +54,40 @@ class AddCat extends React.Component {
     this.setState({ text: e.target.value });
   };
 
+  onChangeAddress = e => {
+    this.setState({ address: e.target.value });
+  };
+
   render() {
 
-    const { text } = this.state;
+    console.log(this.state);
 
     return (
       <div>
-      <h1>Add cat</h1>
-      <AuthUserContext.Consumer>
-      {authUser => (
-      <div>
-        <form onSubmit={e => this.onCreateCat(e, authUser)}>
-          <input
-            type="text"
-            value={text}
-            onChange={this.onChangeText}
-          />
-          <button type="submit">Send</button>
-        </form>
+        <h1>Add cat</h1>
+        <AuthUserContext.Consumer>
+          {authUser => (
+            <div>
+              <form onSubmit={e => this.onCreateCat(e, authUser)}>
+                <input
+                  type="text"
+                  value={this.state.text}
+                  onChange={this.onChangeText}
+                  placeholder="Cats Name"
+                />
+                <input
+                  name="address"
+                  value={this.state.address}
+                  onChange={this.onChangeAddress}
+                  type="text"
+                  placeholder="Cats Postcode">
+                </input>
+                <button type="submit">Send</button>
+              </form>
+            </div>
+          )}
+        </AuthUserContext.Consumer>
       </div>
-       )}
-       </AuthUserContext.Consumer>
-       </div>
     );
     
   }
