@@ -7,3 +7,4 @@ export const ADMIN = '/admin';
 export const ADMIN_DETAILS = '/admin/users/:id'
 export const PASSWORD_FORGET = '/pw-forget';
 export const ADMIN_CAT_DETAILS = '/admin/cats/:id'
+export const CATS = '/cats'

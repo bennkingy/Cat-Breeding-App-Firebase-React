@@ -40,7 +40,7 @@ class MessageBase extends React.Component {
     this.props.firebase.messages().off();
   }
 
-  onCreateMessage =(e, authUser) => {
+  onCreateMessage = (e, authUser) => {
     this.props.firebase.messages().push({
       text: this.state.text,
       userId: authUser.uid
