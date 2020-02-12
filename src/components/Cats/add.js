@@ -4,7 +4,8 @@ import Geocode from "react-geocode";
 
 const INITIAL_STATE = {
   text: '',
-  address: ''
+  address: '',
+  initialAddress: ''
 }
 
 class AddCat extends React.Component {
@@ -17,6 +18,20 @@ class AddCat extends React.Component {
   }
 
   componentDidMount() {
+  }
+
+  getCords(authUser) {
+    setTimeout(() => {
+      this.props.firebase.cats().push({
+        text: this.state.text,
+        image: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9',
+        userId: authUser.uid,
+        address: this.state.address,
+      })
+    }, 1000)
+  }
+
+  onCreateCat = (e, authUser) => {
     // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
     Geocode.setApiKey(process.env.REACT_APP_GOOGLEKEY);
     // set response language. Defaults to english.
@@ -27,25 +42,16 @@ class AddCat extends React.Component {
     // Enable or disable logs. Its optional.
     Geocode.enableDebug();
     // Get latidude & longitude from address.
-  }
-
-  onCreateCat = (e, authUser) => {
-    Geocode.fromAddress(this.state.address).then(
+    Geocode.fromAddress(this.state.initialAddress).then(
       response => {
         const { lat, lng } = response.results[0].geometry.location;
-        this.setState({address: lat + ',' + lng});
+        this.setState({address: lat + ',' + lng},
+          this.getCords(authUser)
+        );
       },
       error => {
         console.error(error);
       }
-    )
-    .then(
-      this.props.firebase.cats().push({
-        text: this.state.text,
-        image: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9',
-        userId: authUser.uid,
-        address: this.state.address,
-      })
     )
     e.preventDefault();
   }
@@ -55,7 +61,7 @@ class AddCat extends React.Component {
   };
 
   onChangeAddress = e => {
-    this.setState({ address: e.target.value });
+    this.setState({ initialAddress: e.target.value });
   };
 
   render() {
@@ -77,7 +83,7 @@ class AddCat extends React.Component {
                 />
                 <input
                   name="address"
-                  value={this.state.address}
+                  value={this.state.initialAddress}
                   onChange={this.onChangeAddress}
                   type="text"
                   placeholder="Cats Postcode">
