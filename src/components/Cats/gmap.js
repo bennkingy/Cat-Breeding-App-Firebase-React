@@ -18,7 +18,7 @@ export class MapContainer extends Component {
        lat: cat.lat,
        lng: cat.lng
      }}
-     onClick={() => console.log("You clicked me!")} />
+     onClick={() => alert(cat.image)} />
     })
   }
 
