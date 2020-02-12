@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 import { withFirebase } from '../Firebase';
+import MapContainer from './gmap';
 
 const CatPage = () => (
   <div>
@@ -62,11 +63,12 @@ class CatBase extends React.Component {
 
     return (
       <div>
-      {loading && <div>Loading ...</div>}
-      {cats ? (
-      <CatList cats={cats} /> ) : (
-        <div>There are no cats</div>
-      )}
+        {loading && <div>Loading ...</div>}
+        {cats ? (
+        <div><CatList cats={cats} />
+        <MapContainer cats={cats} /></div> ) : (
+          <div>There are no cats</div>
+        )}
       </div>
     );
     
