@@ -22,9 +22,6 @@ export class MapContainer extends Component {
     })
   }
 
-  componentDidMount() {
-  }
-
   render() {
     console.log('gmap', this.props)
     return (
