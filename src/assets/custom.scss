@@ -8,8 +8,12 @@ body {
   }
 }
 
+.mapContainerboi {
+  position: relative;
+  height:50vh;
+}
 .mapboxgl-map {
-  height: 200px;
+ position: absolute; top: 0; bottom: 0; width: 100%; 
 }
 
 .headroom--pinned.headroom--scrolled {
