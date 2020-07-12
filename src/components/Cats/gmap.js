@@ -26,6 +26,7 @@ export class MapContainer extends Component {
     console.log('gmap', this.props)
     return (
       <Fragment>
+        <div>
         <Map
           google={this.props.google}
           zoom={8}
@@ -34,6 +35,7 @@ export class MapContainer extends Component {
         >
           {this.displayMarkers()}
         </Map>
+        </div>
       </Fragment>
     );
   }
