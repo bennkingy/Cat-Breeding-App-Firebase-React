@@ -66,7 +66,8 @@ class CatBase extends React.Component {
       <div>
         {loading && <div>Loading ...</div>}
         {cats ? (
-        <div><CatList cats={cats} />
+        <div>
+        <CatList cats={cats} />
         <MapContainer cats={cats} /></div> ) : (
           <div>There are no cats</div>
         )}
