@@ -13,7 +13,7 @@ const Logo = () => (
 
 const Header = () => (
   <nav className="flex items-center justify-between bg-teal-500 p-6">
-    <div clasNames="">
+    <div className="">
       <Logo />
     </div>
     <div className="block w-auto flex items-center ">
@@ -32,24 +32,24 @@ const Header = () => (
 
 const NavigationAuth = ({ authUser }) => (
   <ul>
-    <li class="block inline-block text-teal-200 hover:text-white mr-4">
+    <li className="block inline-block text-teal-200 hover:text-white mr-4">
       <Link to={ROUTES.LANDING}>Landing</Link>
     </li>
-    <li class="block inline-block text-teal-200 hover:text-white mr-4">
+    <li className="block inline-block text-teal-200 hover:text-white mr-4">
       <Link to={ROUTES.HOME}>Home</Link>
     </li>
-    <li class="block inline-block text-teal-200 hover:text-white mr-4">
+    <li className="block inline-block text-teal-200 hover:text-white mr-4">
       <Link to={ROUTES.CATS}>Cats</Link>
     </li>
-    <li class="block inline-block text-teal-200 hover:text-white mr-4">
+    <li className="block inline-block text-teal-200 hover:text-white mr-4">
       <Link to={ROUTES.ACCOUNT}>Account</Link>
     </li>
     {!!authUser.roles[ROLES.ADMIN] && (
-      <li class="block inline-block text-teal-200 hover:text-white mr-4">
+      <li className="block inline-block text-teal-200 hover:text-white mr-4">
       <Link to={ROUTES.ADMIN}>Admin</Link>
     </li>
     )}
-    <li class="block inline-block text-teal-200 hover:text-white mr-4">
+    <li className="block inline-block text-teal-200 hover:text-white mr-4">
       <SignOutButton />
     </li>
   </ul>

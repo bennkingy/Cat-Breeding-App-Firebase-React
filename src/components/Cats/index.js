@@ -77,7 +77,7 @@ class CatBase extends React.Component {
 }
 
 const CatList = ({ cats }) => (
-  <ul>
+  <ul className="flex">
     { cats && cats.map(cat => (
       <CatItem key={cat.uid} cat={cat} />
     ))}
@@ -86,7 +86,8 @@ const CatList = ({ cats }) => (
 
 const CatItem = ({ cat }) => (
   <li>
-    <strong>{cat.userId}</strong> {cat.text} {cat.address} <img src={cat.image} width="200px" />
+    <img src={cat.image} width="200px" />
+    {cat.text}
   </li>
 )
 
