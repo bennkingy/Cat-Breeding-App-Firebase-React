@@ -37,10 +37,13 @@ export class MapContainer extends Component {
       .addTo(map);
     });
 
+    //map.setView(markersLayer.getBounds().getCenter());
+
   }
 
 
   render() {
+
     return (
       <Fragment>
         <div>

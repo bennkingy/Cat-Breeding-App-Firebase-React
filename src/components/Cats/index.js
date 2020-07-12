@@ -6,8 +6,9 @@ import MapContainer from './gmap';
 
 const CatPage = () => (
   <div>
-    <h1>Cats</h1>
-    <p>This page is always accessible.</p>
+    <h1 class="my-4 text-2xl md:text-3xl lg:text-5xl font-black leading-tight">
+      Cats for Stud!
+    </h1>
     <Cats />
   </div>
 )
