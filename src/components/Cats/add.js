@@ -5,7 +5,7 @@ import Geocode from "react-geocode";
 const INITIAL_STATE = {
   text: '',
   lat: '',
-  long: '',
+  lng: '',
   address: ''
 }
 
@@ -32,23 +32,21 @@ class AddCat extends React.Component {
   }
 
   getCords(authUser) {
-    setTimeout(() => {
-      this.props.firebase.cats().push({
-        text: this.state.text,
-        image: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9',
-        userId: authUser.uid,
-        lat: this.state.lat,
-        lng: this.state.lng,
-      })
-      this.setState({ ...INITIAL_STATE });
-    }, 150)
+    this.props.firebase.cats().push({
+      text: this.state.text,
+      image: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9',
+      userId: authUser.uid,
+      lat: this.state.lat,
+      lng: this.state.lng,
+    })
+    this.setState({ ...INITIAL_STATE });
   }
 
   onCreateCat = (e, authUser) => {
     Geocode.fromAddress(this.state.address).then(
       response => {
         const { lat, lng } = response.results[0].geometry.location;
-        this.setState({lat: lat, lng: lng},
+        this.setState({lat: lat, lng: lng}, () =>
           this.getCords(authUser)
         );
       },
