@@ -57,7 +57,7 @@ class CatBase extends React.Component {
 
   render() {
 
-    console.log(this.state);
+    //console.log(this.state);
 
     const { cats, loading } = this.state;
 
