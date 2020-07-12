@@ -16,8 +16,6 @@ export class MapContainer extends Component {
 
   componentWillReceiveProps() {
 
-    console.log('hey', this.props.cats);
-
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v11',
@@ -34,7 +32,7 @@ export class MapContainer extends Component {
     });
 
     this.props.cats.map((cat) => {
-      let marker = new mapboxgl.Marker() // maybe remove el
+      let marker = new mapboxgl.Marker()
       .setLngLat([cat.lng, cat.lat])
       .addTo(map);
     });
@@ -43,7 +41,6 @@ export class MapContainer extends Component {
 
 
   render() {
-
     return (
       <Fragment>
         <div>
