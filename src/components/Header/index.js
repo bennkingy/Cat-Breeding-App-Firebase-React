@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg'; 
+import Headroom from 'react-headroom';
 
 import { AuthUserContext } from '../Session';
 import SignOutButton from '../SignOut';
@@ -12,7 +13,8 @@ const Logo = () => (
 );
 
 const Header = () => (
-  <nav className="flex items-center justify-between p-6">
+  <Headroom>
+  <nav className="flex items-center justify-between p-6 bg-white">
     <div className="">
       <Logo />
     </div>
@@ -28,6 +30,7 @@ const Header = () => (
     </AuthUserContext.Consumer>
     </div>
   </nav>
+  </Headroom>
 );
 
 const NavigationAuth = ({ authUser }) => (

@@ -11,3 +11,7 @@ body {
 .mapboxgl-map {
   height: 200px;
 }
+
+.headroom--pinned.headroom--scrolled {
+  box-shadow: 0 8px 12px -3px rgba(0,0,0,.15);
+}

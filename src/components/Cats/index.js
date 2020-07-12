@@ -6,7 +6,7 @@ import MapContainer from './gmap';
 
 const CatPage = () => (
   <div>
-    <h1 class="my-4 text-2xl md:text-3xl lg:text-5xl font-black leading-tight">
+    <h1 className="my-4 text-2xl md:text-2xl text-center lg:text-5xl font-black leading-tight">
       Our latest cats
     </h1>
     <Cats />
@@ -79,16 +79,16 @@ class CatBase extends React.Component {
 }
 
 const CatList = ({ cats }) => (
-  <div class="flex flex-wrap -mb-4">
-    { cats && cats.map(cat => (
+  <div class="flex mb-4">
+    { cats && cats.slice(0, 3).map(cat => (
       <CatItem key={cat.uid} cat={cat} />
     ))}
   </div>
 )
 
 const CatItem = ({ cat }) => (
-    <div className="">
-      <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style={{ backgroundImage: `url(${cat.image})` }} title="Woman holding a mug">
+    <div className="w-1/3 bg-gray-400 h-auto">
+      <div className="h-48 flex-none bg-cover rounded-t text-center overflow-hidden" style={{ backgroundImage: `url(${cat.image})` }} title="Woman holding a mug">
       </div>
       <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
         <div className="mb-8">
