@@ -5,3 +5,7 @@
 @import "tailwindcss/utilities";
 
 @import "./custom.scss"; 
+
+.mapboxgl-map {
+  height: 300px;
+}
