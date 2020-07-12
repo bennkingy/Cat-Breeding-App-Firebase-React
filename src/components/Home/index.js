@@ -63,7 +63,7 @@ class MessageBase extends React.Component {
 
   render() {
 
-    console.log(this.state);
+    //console.log(this.state);
 
     const { text, messages, loading } = this.state;
     return (

@@ -1,13 +1,12 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import * as ROUTES from '../../constants/routes';
+import React, { Fragment } from 'react';
 import { withFirebase } from '../Firebase';
 import MapContainer from './gmap';
 
 const CatPage = () => (
   <div>
-    <h1>Cats</h1>
-    <p>This page is always accessible.</p>
+    <h1 className="my-4 text-2xl md:text-2xl text-center lg:text-5xl font-black leading-tight">
+      Find your nearest stud
+    </h1>
     <Cats />
   </div>
 )
@@ -57,16 +56,16 @@ class CatBase extends React.Component {
 
   render() {
 
-    console.log(this.state);
-
     const { cats, loading } = this.state;
 
     return (
       <div>
         {loading && <div>Loading ...</div>}
-        {cats ? (
-        <div><CatList cats={cats} />
-        <MapContainer cats={cats} /></div> ) : (
+        {cats.length > 0 && loading == false ? (
+          <div className="mapContainerboi">
+            <MapContainer cats={cats} />
+          </div>
+        ) : (
           <div>There are no cats</div>
         )}
       </div>
@@ -75,21 +74,6 @@ class CatBase extends React.Component {
   }
 
 }
-
-const CatList = ({ cats }) => (
-  <ul className="flex">
-    { cats && cats.map(cat => (
-      <CatItem key={cat.uid} cat={cat} />
-    ))}
-  </ul>
-)
-
-const CatItem = ({ cat }) => (
-  <li>
-    <img src={cat.image} width="200px" />
-    {cat.text}
-  </li>
-)
 
 const Cats = withFirebase(CatBase);
 
