@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../images/logo.png'; 
+import logo from '../../images/logo.svg'; 
 
 import { AuthUserContext } from '../Session';
 import SignOutButton from '../SignOut';
@@ -8,11 +8,11 @@ import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 
 const Logo = () => (
-  <img src={logo} className="w-20" />
+  <img src={logo} className="w-4/5" />
 );
 
 const Header = () => (
-  <nav className="flex items-center justify-between bg-teal-500 p-6">
+  <nav className="flex items-center justify-between p-6">
     <div className="">
       <Logo />
     </div>
@@ -32,24 +32,24 @@ const Header = () => (
 
 const NavigationAuth = ({ authUser }) => (
   <ul>
-    <li className="block inline-block text-teal-200 hover:text-white mr-4">
+    <li className="block inline-block text-black hover:text-white mr-4">
       <Link to={ROUTES.LANDING}>Landing</Link>
     </li>
-    <li className="block inline-block text-teal-200 hover:text-white mr-4">
+    <li className="block inline-block text-black hover:text-white mr-4">
       <Link to={ROUTES.HOME}>Home</Link>
     </li>
-    <li className="block inline-block text-teal-200 hover:text-white mr-4">
+    <li className="block inline-block text-black hover:text-white mr-4">
       <Link to={ROUTES.CATS}>Cats</Link>
     </li>
-    <li className="block inline-block text-teal-200 hover:text-white mr-4">
+    <li className="block inline-block text-black hover:text-white mr-4">
       <Link to={ROUTES.ACCOUNT}>Account</Link>
     </li>
     {!!authUser.roles[ROLES.ADMIN] && (
-      <li className="block inline-block text-teal-200 hover:text-white mr-4">
+      <li className="block inline-block text-black hover:text-white mr-4">
       <Link to={ROUTES.ADMIN}>Admin</Link>
     </li>
     )}
-    <li className="block inline-block text-teal-200 hover:text-white mr-4">
+    <li className="block inline-block text-black hover:text-white mr-4">
       <SignOutButton />
     </li>
   </ul>

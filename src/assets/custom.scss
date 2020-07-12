@@ -1,6 +1,13 @@
 body {
-  background: red;
+  background-color: #D82521;
   h1 {
-    background: blue;
+   //
   }
-} 
+  > * {
+    background: white;
+  }
+}
+
+.mapboxgl-map {
+  height: 200px;
+}
