@@ -1,6 +1,11 @@
-## Available Scripts
+## Cats for stud
+A firebase, react app. Technologies used: Taildiwnd, SCSS, FireBase, React, Mapbox.
+
+### Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
 
 ### `npm run watch`
 
