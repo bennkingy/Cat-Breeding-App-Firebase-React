@@ -6,7 +6,7 @@ const Logo = () => (
 );
 
 const Footer = () => (
-  <footer class="bg-red-1000 p-6 mt-10">
+  <footer class="bg-red-1000 p-6 mt-24">
     <div class="mx-auto container">
       <div class="w-full flex flex-col md:flex-row py-6">
         <div class="flex-1 mb-6">
