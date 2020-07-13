@@ -18,7 +18,7 @@ const App = () => (
     <Router>
       <Fragment>
         <Header />
-        <div className="p-6">
+        <div className="container mx-auto">
           <Route exact path={ROUTES.LANDING} component={LandingPage} />
           <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
           <Route path={ROUTES.SIGN_IN} component={SignInPage} />

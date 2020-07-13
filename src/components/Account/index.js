@@ -2,7 +2,7 @@ import React from 'react';
 import PasswordChangeForm from '../PasswordChange';
 import PasswordForgetForm from '../PasswordForget';
 import { withAuthorization, AuthUserContext } from '../Session';
-import AddCat from '../Cats/add';
+import AddCat from '../Cats/addCat';
 
 const AccountPage = () => (
   <AuthUserContext.Consumer>
