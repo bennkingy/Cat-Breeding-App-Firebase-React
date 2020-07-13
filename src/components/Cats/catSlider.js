@@ -19,7 +19,7 @@ class CatBase extends React.Component {
       cats: []
     }
   }
-
+  
   componentDidMount() {
     this.setState({loading: true});
     this.props.firebase.cats().on('value', snapshot => {
@@ -63,18 +63,18 @@ class CatBase extends React.Component {
 }
 
 const CatList = ({ cats }) => (
-  <div class="flex mb-4">
+  <div class="mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 -m-2">
     { cats && cats.slice(0, 3).map(cat => (
       <CatItem key={cat.uid} cat={cat} />
     ))}
-  </div>
+</div>
 )
 
 const CatItem = ({ cat }) => (
-    <div className="w-1/3 bg-gray-400 h-auto">
-      <div className="h-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style={{ backgroundImage: `url(${cat.image})` }} title="Woman holding a mug">
+    <div className="h-auto py-2 m-2">
+      <div className="h-48 flex-none bg-cover rounded-t text-center overflow-hidden" style={{ backgroundImage: `url(${cat.image})` }} title="Woman holding a mug">
       </div>
-      <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+      <div className="border-r border-b border-l border-gray-400 bg-white rounded-b p-4 flex flex-col justify-between leading-normal">
         <div className="mb-8">
           <p className="text-sm text-gray-600 flex items-center">
             <svg className="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

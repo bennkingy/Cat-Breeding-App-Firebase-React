@@ -14,7 +14,7 @@ const Logo = () => (
 
 const Header = () => (
   <Headroom>
-  <nav className="flex items-center justify-between p-6 bg-white">
+  <nav className="flex items-center justify-between py-6 bg-white container mx-auto">
     <div className="">
       <Logo />
     </div>
@@ -52,7 +52,7 @@ const NavigationAuth = ({ authUser }) => (
       <Link to={ROUTES.ADMIN}>Admin</Link>
     </li>
     )}
-    <li className="block inline-block text-black hover:text-white mr-4">
+    <li className="block inline-block text-black hover:text-white">
       <SignOutButton />
     </li>
   </ul>

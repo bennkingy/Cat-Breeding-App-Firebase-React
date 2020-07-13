@@ -33,7 +33,7 @@ export class MapContainer extends Component {
 
     this.props.cats.map((cat) => {
       var popup = new mapboxgl.Popup({ offset: 25 })
-      .setHTML('<h3>' + cat.text + '</h3><p>' + cat.text + '</p>')
+      .setHTML('<img src="' + cat.image + "'/>" + '<p>' + cat.text + '</p>')
       let marker = new mapboxgl.Marker()
       .setLngLat([cat.lng, cat.lat])
       .setPopup(popup) 
