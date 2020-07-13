@@ -12,28 +12,39 @@ class ReactFirebaseFileUpload extends React.Component {
 
   handleChange = (e) => {
     const image = e.target.files[0];
-    this.setState({ image, name: image.name });
+    if (image.type === 'image/jpeg' || image.type === 'image/png')
+      this.setState({ image, name: image.name });
+    else alert('Only files with format jpeg and png is allowed');
   };
 
-  handleUpload = () => {
-    const uploadTask = firebase
+  handleUpload = async () => {
+    const uploadTask = await firebase
       .storage()
       .ref()
       .child(`/images/${this.state.name}`)
       .put(this.state.image);
 
-    uploadTask.on(
-      'state_changed',
-      () => {
-        this.setState({
-          ...this.state,
-          ImageURL: `https://firebasestorage.googleapis.com/v0/b/${process.env.REACT_APP_STORAGE_BUCKET}/o/images%2F${this.state.name}?alt=media`,
-        });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    if (uploadTask.state === 'success') {
+      this.setState({
+        ...this.state,
+        ImageURL: `https://firebasestorage.googleapis.com/v0/b/${process.env.REACT_APP_STORAGE_BUCKET}/o/images%2F${this.state.name}?alt=media`,
+      });
+    } else {
+      alert('something went wrong');
+    }
+
+    // await uploadTask.on(
+    //   'state_changed',
+    //   async () => {
+    //     await this.setState({
+    //       ...this.state,
+    //       ImageURL: `https://firebasestorage.googleapis.com/v0/b/${process.env.REACT_APP_STORAGE_BUCKET}/o/images%2F${this.state.name}?alt=media`,
+    //     });
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
   };
 
   render() {
