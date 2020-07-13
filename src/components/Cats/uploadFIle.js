@@ -24,7 +24,7 @@ class ReactFirebaseFileUpload extends React.Component {
 
     uploadTask.on(
       'state_changed',
-      (snapshot) => {
+      () => {
         this.setState({
           ...this.state,
           ImageURL: `https://firebasestorage.googleapis.com/v0/b/${process.env.REACT_APP_STORAGE_BUCKET}/o/images%2F${this.state.name}?alt=media`,

@@ -36,8 +36,7 @@ class AddCat extends React.Component {
     console.log();
     this.props.firebase.cats().push({
       text: this.state.text,
-      image:
-        'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9',
+      // image: `https://firebasestorage.googleapis.com/v0/b/${process.env.REACT_APP_STORAGE_BUCKET}/o/images%2F${fileName}?alt=media`,
       userId: authUser.uid,
       lat: this.state.lat,
       lng: this.state.lng,
