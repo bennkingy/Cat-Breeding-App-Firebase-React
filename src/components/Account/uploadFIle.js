@@ -2,51 +2,64 @@ import React from 'react';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 
-export class ReactFirebaseFileUpload extends React.Component {
-
+class ReactFirebaseFileUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: null
-    }
+      image: null,
+    };
   }
 
-  handleChange = e => {
-    if(e.target.files[0]) {
-      this.setState(
-        {
-          image: e.target.files[0]
-        });
-    }
+  handleChange = (e) => {
+    const image = e.target.files[0];
+    if (image.type === 'image/jpeg' || image.type === 'image/png')
+      this.setState({ image, name: image.name });
+    else alert('Only files with format jpeg and png is allowed');
   };
 
-  handleUpload = () => {
-    const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
-    uploadTask.on(
-      "state_changed",
-      snapshot => {},
-      error => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("images")
-          .child(this.state.image.name)
-          .getDownloadURL()
-          .then(url => {
-            console.log(url);
-          })
-      }
-    )
-  }
+  handleUpload = async () => {
+    const uploadTask = await firebase
+      .storage()
+      .ref()
+      .child(`/images/${this.state.name}`)
+      .put(this.state.image);
+
+    if (uploadTask.state === 'success') {
+      this.setState({
+        ...this.state,
+        ImageURL: `https://firebasestorage.googleapis.com/v0/b/${process.env.REACT_APP_STORAGE_BUCKET}/o/images%2F${this.state.name}?alt=media`,
+      });
+    } else {
+      alert('something went wrong');
+    }
+
+    // await uploadTask.on(
+    //   'state_changed',
+    //   async () => {
+    //     await this.setState({
+    //       ...this.state,
+    //       ImageURL: `https://firebasestorage.googleapis.com/v0/b/${process.env.REACT_APP_STORAGE_BUCKET}/o/images%2F${this.state.name}?alt=media`,
+    //     });
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+  };
 
   render() {
     return (
       <div>
-        <input type="file" onChange={this.handleChange} />
-        <button type="submit" onClick={this.handleUpload}>Send</button>
+        <input type='file' onChange={this.handleChange} />
+        <button type='submit' onClick={this.handleUpload}>
+          Upload image
+        </button>
+        {this.state.ImageURL && (
+          <img src={this.state.ImageURL} width={40} height={40} alt='cat' />
+        )}
       </div>
     );
   }
+}
 
-};
+export default ReactFirebaseFileUpload;
