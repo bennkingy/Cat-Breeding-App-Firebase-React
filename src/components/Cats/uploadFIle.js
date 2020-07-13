@@ -2,51 +2,53 @@ import React from 'react';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 
-export class ReactFirebaseFileUpload extends React.Component {
-
+class ReactFirebaseFileUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: null
-    }
+      image: null,
+    };
   }
 
-  handleChange = e => {
-    if(e.target.files[0]) {
-      this.setState(
-        {
-          image: e.target.files[0]
-        });
-    }
+  handleChange = (e) => {
+    const image = e.target.files[0];
+    this.setState({ image, name: image.name });
   };
 
   handleUpload = () => {
-    const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
+    const uploadTask = firebase
+      .storage()
+      .ref()
+      .child(`/images/${this.state.name}`)
+      .put(this.state.image);
+
     uploadTask.on(
-      "state_changed",
-      snapshot => {},
-      error => {
-        console.log(error);
+      'state_changed',
+      (snapshot) => {
+        this.setState({
+          ...this.state,
+          ImageURL: `https://firebasestorage.googleapis.com/v0/b/${process.env.REACT_APP_STORAGE_BUCKET}/o/images%2F${this.state.name}?alt=media`,
+        });
       },
-      () => {
-        storage
-          .ref("images")
-          .child(this.state.image.name)
-          .getDownloadURL()
-          .then(url => {
-            console.log(url);
-          })
+      (error) => {
+        console.log(error);
       }
-    )
-  }
+    );
+  };
 
   render() {
     return (
       <div>
-        <input type="file" onChange={this.handleChange} />
-        <button type="submit" onClick={this.handleUpload}>Send</button>
+        <input type='file' onChange={this.handleChange} />
+        <button type='submit' onClick={this.handleUpload}>
+          Upload image
+        </button>
+        {this.state.ImageURL && (
+          <img src={this.state.ImageURL} width={40} height={40} alt='cat' />
+        )}
       </div>
     );
   }
+}
 
-};
+export default ReactFirebaseFileUpload;
