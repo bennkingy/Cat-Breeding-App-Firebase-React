@@ -26,7 +26,7 @@ class ReactFirebaseFileUpload extends React.Component {
     if (uploadTask.state === 'success') {
       this.setState({
         ...this.state,
-        ImageURL: `https://firebasestorage.googleapis.com/v0/b/${process.env.REACT_APP_STORAGE_BUCKET}/o/images%2F${this.state.name}?alt=media`,
+        imageURL: `https://firebasestorage.googleapis.com/v0/b/${process.env.REACT_APP_STORAGE_BUCKET}/o/images%2F${this.state.name}?alt=media`,
       });
     }
     else {
@@ -41,8 +41,8 @@ class ReactFirebaseFileUpload extends React.Component {
         <button type='submit' onClick={this.handleUpload}>
           Upload image
         </button>
-        {this.state.ImageURL && (
-          <img src={this.state.ImageURL} width={40} height={40} alt='cat' />
+        {this.state.imageURL && (
+          <img src={this.state.imageURL} width={40} height={40} alt='cat' />
         )}
       </div>
     );
