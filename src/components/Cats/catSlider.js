@@ -3,7 +3,7 @@ import { withFirebase } from '../Firebase';
 
 const CatSlider = () => (
   <div>
-    <h1 className="my-4 text-2xl md:text-2xl text-center lg:text-5xl font-black leading-tight">
+    <h1 className="my-4 mb-10 text-2xl md:text-2xl text-center lg:text-5xl font-black leading-tight">
       Our latest stud's
     </h1>
     <CatSliders />
@@ -63,7 +63,7 @@ class CatBase extends React.Component {
 }
 
 const CatList = ({ cats }) => (
-  <div class="mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 -m-2">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 -m-2">
     { cats && cats.slice(0, 3).map(cat => (
       <CatItem key={cat.uid} cat={cat} />
     ))}
