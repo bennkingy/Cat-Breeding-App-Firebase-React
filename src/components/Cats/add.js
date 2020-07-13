@@ -34,7 +34,7 @@ class AddCat extends React.Component {
   getCords(authUser) {
     this.props.firebase.cats().push({
       text: this.state.text,
-      image: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9',
+      image: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9', // THIS IS HARD CODED
       userId: authUser.uid,
       lat: this.state.lat,
       lng: this.state.lng,
@@ -89,6 +89,7 @@ class AddCat extends React.Component {
                   type="text"
                   placeholder="Cats Postcode">
                 </input>
+                // FILE UPLOAD COMPONENT GOES HERE! 
                 <button type="submit">Send</button>
               </form>
             </div>
