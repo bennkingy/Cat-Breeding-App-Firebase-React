@@ -23,28 +23,15 @@ class ReactFirebaseFileUpload extends React.Component {
       .ref()
       .child(`/images/${this.state.name}`)
       .put(this.state.image);
-
     if (uploadTask.state === 'success') {
       this.setState({
         ...this.state,
         ImageURL: `https://firebasestorage.googleapis.com/v0/b/${process.env.REACT_APP_STORAGE_BUCKET}/o/images%2F${this.state.name}?alt=media`,
       });
-    } else {
+    }
+    else {
       alert('something went wrong');
     }
-
-    // await uploadTask.on(
-    //   'state_changed',
-    //   async () => {
-    //     await this.setState({
-    //       ...this.state,
-    //       ImageURL: `https://firebasestorage.googleapis.com/v0/b/${process.env.REACT_APP_STORAGE_BUCKET}/o/images%2F${this.state.name}?alt=media`,
-    //     });
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
   };
 
   render() {

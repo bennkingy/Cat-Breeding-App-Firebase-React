@@ -61,7 +61,9 @@ class PasswordChangeForm extends Component {
 						type="password"
 						placeholder="Password">
 					</input>
+          
 					<button type="submit" disabled={isInvalid}>Change My Password</button>
+
 					{error && <p>{error.message}</p>}
 				</form>
 			</div>
