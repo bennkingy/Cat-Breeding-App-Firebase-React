@@ -5,7 +5,7 @@ import 'firebase/storage';
 class ReactFirebaseFileUpload extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = { 
       image: null,
     };
   }

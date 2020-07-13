@@ -2,13 +2,14 @@ import React from 'react';
 import { AuthUserContext, withAuthorization } from '../Session';
 import Geocode from 'react-geocode';
 
-import UploadFile from '../Account/uploadFile.js';
+import UploadFile from '../Account/uploadFile';
 
 const INITIAL_STATE = {
   text: '',
   lat: '',
   lng: '',
-  address: '',
+  address: ''
+  //imageForUpload: null
 };
 
 class AddCat extends React.Component {
