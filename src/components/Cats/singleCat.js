@@ -53,7 +53,7 @@ class CatItemBase extends React.Component {
           <div>
             <span>
               <strong>ID:</strong>                                                                                  
-              <div className="h-48 bg-cover rounded-t text-center overflow-hidden" style={{ backgroundImage: `url(${cat[this.props.match.params.id].imageURL})` }} title=""></div>
+              <div className="h-48 flex-none bg-cover rounded-t text-center overflow-hidden" style={{ backgroundImage: `url(${cat[this.props.match.params.id].imageURL})` }} title=""></div>
             </span>          
           </div>
         )}
