@@ -6,7 +6,7 @@ import * as ROUTES from '../../constants/routes';
 const SingleCatPage = () => (
   <div>
     <h1>Cat</h1>
-    <p>The Admin Page is accessible by every signed in admin user.</p>
+    <p>Cat page.</p>
     <Switch>
       <Route exact path={ROUTES.CAT_DETAILS} component={CatItem} />
     </Switch>
