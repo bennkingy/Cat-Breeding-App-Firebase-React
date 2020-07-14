@@ -39,23 +39,21 @@ class PasswordChangeForm extends Component {
       passwordOne, passwordTwo, error
 		} = this.state;
 		
-		const isInvalid =
-			passwordOne === ''
-			|| passwordTwo === '';
+		const isInvalid = passwordOne !== passwordTwo || passwordOne === '';
 
     return (
 			<div>	
 				<h1>Password Change</h1>	
 				<form onSubmit={this.onSubmit}>
 					<input
-						name="password"
+						name="passwordOne"
 						value={passwordOne}
 						onChange={this.onChange}
 						type="password"
 						placeholder="Password">
 					</input>
 					<input
-						name="password"
+						name="passwordTwo"
 						value={passwordTwo}
 						onChange={this.onChange}
 						type="password"
