@@ -72,7 +72,7 @@ const CatList = ({ cats }) => (
 
 const CatItem = ({ cat }) => (
     <div className="h-auto py-2 m-8">
-      <div className="h-48 flex-none bg-cover rounded-t text-center overflow-hidden" style={{ backgroundImage: `url(${cat.imageURL})` }} title="Woman holding a mug">
+      <div className="h-48 flex-none bg-cover rounded-t text-center overflow-hidden" style={{ backgroundImage: `url(${cat.imageURL})` }} title="">
       </div>
       <div className="border-r border-b border-l border-gray-400 bg-white rounded-b p-4 flex flex-col justify-between leading-normal">
         <div className="">
