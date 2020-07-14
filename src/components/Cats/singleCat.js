@@ -7,20 +7,17 @@ const SingleCatPage = () => (
   <div>
     <h1>Cat</h1>
     <p>Cat page.</p>
-    <Switch>
-      <Route exact path={ROUTES.CAT_DETAILS} component={CatItem} />
-    </Switch>
+      <Route component={SingleCat} /> {/* How to make this work as just > <SingleCat /> */}
   </div>
 )
 
-class CatItemBase extends React.Component {
+class SingleCatBase extends React.Component {
 
   constructor(props) {
 		super(props)
 		this.state = {
 			loading: false,
-      cat: null,
-      ...props.location.state
+      cat: null
 		}
   }
 
@@ -50,11 +47,9 @@ class CatItemBase extends React.Component {
         <h2>Cat ({this.props.match.params.id})</h2>
         {loading && <div>Loading ...</div>}
         {cat && (
-          <div>
-            <span>
-              <strong>ID:</strong>                                                                                  
-              <div className="h-48 flex-none bg-cover rounded-t text-center overflow-hidden" style={{ backgroundImage: `url(${cat[this.props.match.params.id].imageURL})` }} title=""></div>
-            </span>          
+          <div> 
+            <h1>{cat['-'+this.props.match.params.id].text ? cat['-'+this.props.match.params.id].text : ''}</h1>                                                                                              
+            <div className="h-48 flex-none bg-cover rounded-t text-center overflow-hidden" style={{ backgroundImage: `url(${cat['-'+this.props.match.params.id].imageURL})` }} title=""></div>
           </div>
         )}
       </div>
@@ -62,6 +57,6 @@ class CatItemBase extends React.Component {
   }
 }
  
-const CatItem = withFirebase(CatItemBase);  
+const SingleCat = withFirebase(SingleCatBase);  
 
 export default SingleCatPage;

@@ -60,14 +60,14 @@ const NavigationAuth = ({ authUser }) => (
 
 const NavigationNonAuth = () => (
   <ul>
-    <li>
+    <li className="block inline-block text-black hover:text-white mr-4">
       <Link to={ROUTES.LANDING}>Landing</Link>
-    </li>
-    <li>
-      <Link to={ROUTES.SIGN_IN}>Sign In</Link>
     </li>
     <li className="block inline-block text-black hover:text-white mr-4">
       <Link to={ROUTES.CATS}>Cats</Link>
+    </li>
+    <li className="block inline-block text-black hover:text-white mr-4">
+      <Link to={ROUTES.SIGN_IN}>Sign In</Link>
     </li>
   </ul>
 );
