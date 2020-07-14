@@ -12,6 +12,7 @@ const INITIAL_STATE = {
   lng: '',
   address: '',
   imageURL: '',
+  description: '',
 };
 
 class AddCat extends React.Component {
@@ -67,6 +68,10 @@ class AddCat extends React.Component {
     this.setState({ address: e.target.value });
   };
 
+  onChangeDescription = (e) => {
+    this.setState({ description: e.target.value });
+  };
+
   handleChange = (e) => {
     const image = e.target.files[0];
     if (!image) return alert('Add an image');
@@ -109,14 +114,21 @@ class AddCat extends React.Component {
                   type='text'
                   value={this.state.text}
                   onChange={this.onChangeText}
-                  placeholder='Cats Name'
+                  placeholder='Cat name'
                 />
                 <input
                   name='address'
                   value={this.state.address}
                   onChange={this.onChangeAddress}
                   type='text'
-                  placeholder='Cats Postcode'
+                  placeholder='Cat postcode'
+                ></input>
+                <input
+                  name='description'
+                  value={this.state.description}
+                  onChange={this.onChangeDescription}
+                  type='text'
+                  placeholder='Cat description'
                 ></input>
                 <UploadFile
                   handleChange={this.handleChange}
