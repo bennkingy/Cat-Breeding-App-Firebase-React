@@ -14,22 +14,22 @@ const Logo = () => (
 
 const Header = () => (
   <Headroom>
-  <nav className="flex items-center justify-between py-6 bg-white container mx-auto">
-    <div className="">
-      <Logo />
-    </div>
-    <div className="block w-auto flex items-center ">
-    <AuthUserContext.Consumer>
-      {authUser =>
-        authUser ? (
-          <NavigationAuth authUser={authUser} />
-        ) : (
-          <NavigationNonAuth />
-        )
-      }
-    </AuthUserContext.Consumer>
-    </div>
-  </nav>
+    <nav className="flex items-center justify-between py-6 bg-white container mx-auto">
+      <div className="">
+        <Logo />
+      </div>
+      <div className="block w-auto flex items-center ">
+      <AuthUserContext.Consumer>
+        {authUser =>
+          authUser ? (
+            <NavigationAuth authUser={authUser} />
+          ) : (
+            <NavigationNonAuth />
+          )
+        }
+      </AuthUserContext.Consumer>
+      </div>
+    </nav>
   </Headroom>
 );
 
