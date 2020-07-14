@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { withFirebase } from '../Firebase';
+import { Switch, Route, Link } from 'react-router-dom';
 
 const CatSlider = () => (
   <div>
@@ -42,7 +43,7 @@ class CatBase extends React.Component {
 
   render() {
 
-    //console.log(this.state);
+    console.log('landing', this.state);
 
     const { cats, loading } = this.state;
 
@@ -71,6 +72,7 @@ const CatList = ({ cats }) => (
 )
 
 const CatItem = ({ cat }) => (
+  <a href={'/cat/'+(cat.uid).substr(1)}>
     <div className="h-auto py-2 m-8">
       <div className="h-48 flex-none bg-cover rounded-t text-center overflow-hidden" style={{ backgroundImage: `url(${cat.imageURL})` }} title="">
       </div>
@@ -80,7 +82,7 @@ const CatItem = ({ cat }) => (
             <svg className="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
             </svg>
-           Locatoin
+            Location
           </p> */}
           <div className="text-gray-900 font-bold text-xl">{cat.text}</div>
           {/* <p className="text-gray-700 text-base">{cat.text}</p> */}
@@ -94,6 +96,7 @@ const CatItem = ({ cat }) => (
         </div> */}
       </div>
     </div>
+  </a>
 )
 
 const CatSliders = withFirebase(CatBase);
