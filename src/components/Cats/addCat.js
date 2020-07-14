@@ -1,6 +1,8 @@
 import React from 'react';
 import { AuthUserContext, withAuthorization } from '../Session';
 import Geocode from 'react-geocode';
+import firebase from 'firebase/app';
+import 'firebase/storage';
 
 import UploadFile from '../Account/uploadFile';
 
@@ -8,8 +10,8 @@ const INITIAL_STATE = {
   text: '',
   lat: '',
   lng: '',
-  address: ''
-  //imageForUpload: null
+  address: '',
+  imageURL: '',
 };
 
 class AddCat extends React.Component {
@@ -34,10 +36,9 @@ class AddCat extends React.Component {
   }
 
   getCords(authUser) {
-    console.log();
     this.props.firebase.cats().push({
       text: this.state.text,
-      // image: `https://firebasestorage.googleapis.com/v0/b/${process.env.REACT_APP_STORAGE_BUCKET}/o/images%2F${fileName}?alt=media`,
+      imageURL: this.state.imageURL,
       userId: authUser.uid,
       lat: this.state.lat,
       lng: this.state.lng,
@@ -46,7 +47,6 @@ class AddCat extends React.Component {
   }
 
   onCreateCat = (e, authUser) => {
-    console.log(this.state);
     Geocode.fromAddress(this.state.address).then(
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
@@ -65,6 +65,34 @@ class AddCat extends React.Component {
 
   onChangeAddress = (e) => {
     this.setState({ address: e.target.value });
+  };
+
+  handleChange = (e) => {
+    const image = e.target.files[0];
+    if (!image) return alert('Add an image');
+    if (image.type === 'image/jpeg' || image.type === 'image/png')
+      this.setState({ image, name: image.name });
+    else alert('Only files with format jpeg and png is allowed');
+  };
+
+  handleUpload = async () => {
+    try {
+      const uploadTask = await firebase
+        .storage()
+        .ref(`/images/${this.state.name}`)
+        .put(this.state.image);
+
+      if (uploadTask.state === 'success') {
+        this.setState({
+          ...this.state,
+          imageURL: `https://firebasestorage.googleapis.com/v0/b/${process.env.REACT_APP_STORAGE_BUCKET}/o/images%2F${this.state.name}?alt=media`,
+        });
+      } else {
+        alert('something went wrong');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   render() {
@@ -90,7 +118,11 @@ class AddCat extends React.Component {
                   type='text'
                   placeholder='Cats Postcode'
                 ></input>
-                <UploadFile />
+                <UploadFile
+                  handleChange={this.handleChange}
+                  handleUpload={this.handleUpload}
+                  imageURL={this.state.imageURL}
+                />
                 <button type='submit'>Send</button>
               </form>
             </div>
