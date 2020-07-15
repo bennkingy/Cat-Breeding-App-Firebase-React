@@ -10,6 +10,7 @@
     "node-sass": "^4.14.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-dropdown-select": "^4.4.2",
     "react-geocode": "^0.2.1",
     "react-headroom": "^3.0.0",
     "react-map-gl": "^5.2.7",

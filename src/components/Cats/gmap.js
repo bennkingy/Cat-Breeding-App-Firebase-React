@@ -51,10 +51,11 @@ const MapContainer = (props) => {
               setSelectedCat(null);
             }}
           >
-            <div>
+            <a href={'/cat/'+(selectedCat.uid).substr(1)}>
+              <div className="h-48 flex-none bg-cover rounded-t text-center overflow-hidden" style={{ backgroundImage: `url(${selectedCat.imageURL})` }}></div>
               <h2>{selectedCat.text}</h2>
               <p>{selectedCat.description}</p>
-            </div>
+            </a>
           </Popup>
         ) : null}
 
