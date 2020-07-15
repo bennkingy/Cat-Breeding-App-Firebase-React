@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { withFirebase } from '../Firebase';
-import MapContainer from './gmap';
+import MapContainer from './gmap.js';
 
 const CatPage = () => (
   <div>

@@ -1,19 +1,8 @@
 body {
   background-color: #D82521;
-  h1 {
-   //
-  }
   > * {
     background: white;
   }
-}
-
-.mapContainerboi {
-  position: relative;
-  height:50vh;
-}
-.mapboxgl-map {
- position: absolute; top: 0; bottom: 0; width: 100%; 
 }
 
 .headroom {
