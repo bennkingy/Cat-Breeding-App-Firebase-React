@@ -1,73 +1,84 @@
-import React, { Component } from "react";
-import ReactMapGL, { Marker, Popup } from "react-map-gl"; 
-import MapMarker from '../../images/mapmarker.svg'; 
+import React, { useState, useEffect } from "react";
+import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import MapMarker from "./../../images/mapmarker.svg";
 
 const MapMarkerImage = () => (
   <img src={MapMarker} height={40} width={40} />
 );
 
-export class MapContainer extends Component {
+const MapContainer = (props) => {
+  const [viewport, setViewport] = useState({
+    latitude: 51.5074,
+    longitude:  0.1278,
+    width: "100%",
+    height: "80vh",
+    zoom: 6
+  });
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      viewport: {
-        latitude: 51.5074,
-        longitude: 0.1278,
-        width: "100%",
-        height: "100vh",
-        zoom: 2,
-        selectedCat: null
+  const [selectedCat, setSelectedCat] = useState(null);
+
+  console.log(props.cats);
+
+  useEffect(() => {
+    const listener = e => {
+      if (e.key === "Escape") {
+        setSelectedCat(null);
       }
     };
-  }
+    window.addEventListener("keydown", listener);
 
-  render() {
+    return () => {
+      window.removeEventListener("keydown", listener);
+    };
+  }, []);
 
-    console.log(this.state);
-
-    return (
+  return (
+    <div>
       <ReactMapGL
-        {...this.state.viewport}
-        mapStyle="mapbox://styles/mapbox/dark-v9"
-        onViewportChange={(viewport) => this.setState({viewport})}
+        {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOXPKEY}
+        mapStyle="mapbox://styles/mapbox/streets-v11"
+        onViewportChange={viewport => {
+          setViewport(viewport);
+        }}
       >
-        {this.props.cats.map(cat => (
+
+        {selectedCat ? (
+          <Popup
+            latitude={selectedCat.lat}
+            longitude={selectedCat.lng}
+            onClose={() => {
+              setSelectedCat(null);
+            }}
+          >
+            <div>
+              <h2>{selectedCat.text}</h2>
+              <p>{selectedCat.description}</p>
+            </div>
+          </Popup>
+        ) : null}
+
+        {props.cats.map(cat => (
           <Marker
             key={cat.uid}
             latitude={cat.lat}
             longitude={cat.lng}
           >
             <button
-              onClick={() => {
-                this.setState({
-                 selctedCat: cat
-              })}}
+              className="marker-btn"
+              onClick={e => {
+                e.preventDefault();
+                setSelectedCat(cat);
+              }}
             >
               <MapMarkerImage />
             </button>
           </Marker>
-         ))}
-        {this.state.selectedCat ? (
-          <Popup 
-            key={this.state.selectedCat.uid}
-            latitude={this.state.selectedCat.lat}
-            longitude={this.state.selectedCat.lng}
-            onClose={() => {
-              this.setState({
-                selectedCat: null
-              })
-            }}
-          >
-            <div>
-              <h2>{this.state.selectedCat.text}fdsfdsf</h2>
-            </div>
-          </Popup>
-        ) : '' }
+        ))}
+
       </ReactMapGL>
-    );
-  }
+    </div>
+  );
 }
 
 export default (MapContainer);

@@ -41,7 +41,6 @@ class SingleCatBase extends React.Component {
   render() {
     const { cat, loading } = this.state;
     console.log(this.state);
-
     return (
       <div>
         <h2>Cat ({this.props.match.params.id})</h2>

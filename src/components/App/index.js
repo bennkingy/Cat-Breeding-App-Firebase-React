@@ -13,6 +13,7 @@ import Footer from '../Footer';
 import SingleCatPage from '../Cats/singleCat'
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 const App = () => (
     <Router>
