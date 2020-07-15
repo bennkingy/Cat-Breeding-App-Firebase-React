@@ -9,14 +9,14 @@ const AccountPage = () => (
   <AuthUserContext.Consumer>
 		{authUser => (
 			<div>
-				<h1>Account: {authUser.email}</h1>
+				{/* <h1>Account: {authUser.email}</h1> */}
         {console.log(authUser)}
 				<PasswordChangeForm />
         <hr/>
-				<PasswordForgetForm />
-        <hr/>
-        <AddProfilePic />
-        <hr/>
+				{/* <PasswordForgetForm /> */}
+        {/* <hr/> */}
+        {/* <AddProfilePic /> */}
+        {/* <hr/> */}
         <AddCat />
 			</div>
 		)}

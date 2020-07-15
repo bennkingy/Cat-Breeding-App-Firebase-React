@@ -42,29 +42,38 @@ class PasswordChangeForm extends Component {
 		const isInvalid = passwordOne !== passwordTwo || passwordOne === '';
 
     return (
-			<div>	
-				<h1>Password Change</h1>	
-				<form onSubmit={this.onSubmit}>
-					<input
-						name="passwordOne"
-						value={passwordOne}
-						onChange={this.onChange}
-						type="password"
-						placeholder="Password">
-					</input>
-					<input
-						name="passwordTwo"
-						value={passwordTwo}
-						onChange={this.onChange}
-						type="password"
-						placeholder="Password">
-					</input>
-          
-					<button type="submit" disabled={isInvalid}>Change My Password</button>
-
-					{error && <p>{error.message}</p>}
-				</form>
-			</div>
+			<form onSubmit={this.onSubmit} className="mb-6">
+        <div className="flex flex-wrap -mx-3">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+              New Password
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              name="passwordOne"
+              value={passwordOne}
+              onChange={this.onChange}
+              type="password"
+              placeholder="Enter new password">
+            </input>
+          </div>
+          <div className="w-full md:w-1/2 px-3">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+             Repeat New Password
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              name="passwordTwo"
+              value={passwordTwo}
+              onChange={this.onChange}
+              type="password"
+              placeholder="Enter new password">
+            </input>
+          </div>
+          </div>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" disabled={isInvalid}>Change My Password</button>
+        {error && <p>{error.message}</p>}
+      </form>
     );
   }
 }

@@ -12,7 +12,6 @@ const INITIAL_STATE = {
 
 const PasswordForgetPage = () => (
 	<div>
-		<h1>Password Forgot</h1>
 		<PasswordForgetForm />
 	</div>
 )
@@ -52,19 +51,26 @@ class PasswordForgetFormBase extends Component {
 			email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-				<input
-					name="email"
-					value={email}
-					onChange={this.onChange}
-					type="text"
-					placeholder="Email">
-				</input>
-
-				<button type="submit" disabled={isInvalid}>Reset My Password</button>
-
-				{error && <p>{error.message}</p>}
-      </form>
+      <div>
+        <form onSubmit={this.onSubmit } className="mb-6">
+          <div class="flex flex-wrap -mx-3 mt-6">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+              Reset Password
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
+              name="email"
+              value={email}
+              onChange={this.onChange}
+              type="text"
+              placeholder="Enter your email">
+            </input>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" disabled={isInvalid}>Reset My Password</button>
+            </div>
+          </div>
+          {error && <p>{error.message}</p>}
+        </form>
+      </div>
     );
   }
 }
