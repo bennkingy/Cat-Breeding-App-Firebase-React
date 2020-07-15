@@ -54,6 +54,11 @@ export class MapContainer extends Component {
             key={this.state.selectedCat.uid}
             latitude={this.state.selectedCat.lat}
             longitude={this.state.selectedCat.lng}
+            onClose={() => {
+              this.setState({
+                selectedCat: null
+              })
+            }}
           >
             <div>
               <h2>{this.state.selectedCat.text}fdsfdsf</h2>
