@@ -16,7 +16,9 @@ const Header = () => (
   <Headroom>
     <nav className="flex items-center justify-between py-6 bg-white container mx-auto">
       <div className="">
-        <Logo />
+        <Link to={ROUTES.HOME}>
+            <Logo/>
+        </Link>
       </div>
       <div className="block w-auto flex items-center ">
       <AuthUserContext.Consumer>

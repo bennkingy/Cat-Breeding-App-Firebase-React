@@ -43,6 +43,7 @@ class AddCat extends React.Component {
       userId: authUser.uid,
       lat: this.state.lat,
       lng: this.state.lng,
+      description: this.state.description
     });
     this.setState({ ...INITIAL_STATE });
   }
@@ -86,13 +87,13 @@ class AddCat extends React.Component {
         .storage()
         .ref(`/images/${this.state.name}`)
         .put(this.state.image);
-
-      if (uploadTask.state === 'success') {
-        this.setState({
-          ...this.state,
-          imageURL: `https://firebasestorage.googleapis.com/v0/b/${process.env.REACT_APP_STORAGE_BUCKET}/o/images%2F${this.state.name}?alt=media`,
-        });
-      } else {
+        if (uploadTask.state === 'success') {
+          this.setState({
+            ...this.state,
+            imageURL: `https://firebasestorage.googleapis.com/v0/b/${process.env.REACT_APP_STORAGE_BUCKET}/o/images%2F${this.state.name}?alt=media`,
+          });
+        }
+      else {
         alert('something went wrong');
       }
     } catch (error) {

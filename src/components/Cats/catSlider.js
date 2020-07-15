@@ -85,7 +85,7 @@ const CatItem = ({ cat }) => (
             Location
           </p> */}
           <div className="text-gray-900 font-bold text-xl">{cat.text}</div>
-          {/* <p className="text-gray-700 text-base">{cat.text}</p> */}
+          <p className="text-gray-700 text-base">{cat.description ? cat.description : ''}</p>
         </div>
         {/* <div className="flex items-center">
           {cat.image && <img className="w-10 h-10 rounded-full mr-4" src={cat.image} alt="Avatar of Jonathan Reinink"/> }
