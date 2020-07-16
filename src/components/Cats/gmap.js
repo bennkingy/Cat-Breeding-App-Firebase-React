@@ -12,12 +12,12 @@ const MapContainer = (props) => {
     longitude:  0.1278,
     width: "100%",
     height: "80vh",
-    zoom: 6
+    zoom: 9
   });
 
   const [selectedCat, setSelectedCat] = useState(null);
 
-  console.log(props.cats);
+  // const mapRef = React.createRef();
 
   useEffect(() => {
     const listener = e => {
@@ -32,6 +32,17 @@ const MapContainer = (props) => {
     };
   }, []);
 
+  const ref = React.createRef();
+  const onLoad = () => {
+     const bounds = ref.current.getMap().getBounds().toArray().flat();
+     ref.current.getMap().fitBounds(bounds, {
+      padding: { top: 50, bottom: 50, left: 50, right: 50 },
+      easing(t) {
+          return t * (2 - t);
+      },
+  });
+  };
+
   return (
     <div>
       <ReactMapGL
@@ -41,6 +52,8 @@ const MapContainer = (props) => {
         onViewportChange={viewport => {
           setViewport(viewport);
         }}
+        ref={ref}
+        onLoad={onLoad}
       >
 
         {selectedCat ? (
@@ -52,7 +65,7 @@ const MapContainer = (props) => {
             }}
           >
             <a href={'/cat/'+(selectedCat.uid).substr(1)}>
-              <div className="h-48 flex-none bg-cover rounded-t text-center overflow-hidden" style={{ backgroundImage: `url(${selectedCat.imageURL})` }}></div>
+              <div className="h-48 w-48 bg-center flex-none bg-cover rounded-t text-center overflow-hidden" style={{ backgroundImage: `url(${selectedCat.imageURL})` }}></div>
               <h2>{selectedCat.text}</h2>
               <p>{selectedCat.description}</p>
             </a>

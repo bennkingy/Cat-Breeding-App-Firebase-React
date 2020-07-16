@@ -4,7 +4,7 @@ import MapContainer from './gmap.js';
 
 const CatPage = () => (
   <div>
-    <h1 className="my-4 text-2xl md:text-2xl text-center lg:text-5xl font-black leading-tight">
+    <h1 className="mb-10 text-2xl md:text-2xl text-center lg:text-5xl font-black leading-tight">
       Find your nearest stud
     </h1>
     <Cats />
