@@ -17,6 +17,20 @@ const MapContainer = (props) => {
 
   const [selectedCat, setSelectedCat] = useState(null);
 
+  const points = props.cats.map(cat => ({
+    type: "Feature",
+    properties: { cluster: false, catId: cat.uid, category: 'Cat' },
+    geometry: {
+      type: "Point",
+      coordinates: [
+        parseFloat(cat.longitude),
+        parseFloat(cat.latitude)
+      ]
+    }
+  }));
+
+  console.log('points', points);
+
   // const mapRef = React.createRef();
 
   useEffect(() => {
