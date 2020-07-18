@@ -43,6 +43,7 @@ class CatBase extends React.Component {
 
   render() {
 
+
     console.log('landing', this.state);
 
     const { cats, loading } = this.state;
@@ -65,7 +66,7 @@ class CatBase extends React.Component {
 
 const CatList = ({ cats }) => (
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 -m-8">
-    { cats && cats.slice(0, 3).map(cat => (
+    { cats && cats.slice().reverse().slice(0, 3).map(cat => (
       <CatItem key={cat.uid} cat={cat} />
     ))}
 </div>
