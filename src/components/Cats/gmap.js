@@ -7,32 +7,19 @@ const MapMarkerImage = () => (
 );
 
 const MapContainer = (props) => {
+
+  console.log(props.cats);
+
   const [viewport, setViewport] = useState({
     latitude: 51.5074,
     longitude:  0.1278,
     width: "100%",
-    height: "80vh",
+    height: "100vh",
     zoom: 9
   });
 
   const [selectedCat, setSelectedCat] = useState(null);
-
-  const points = props.cats.map(cat => ({
-    type: "Feature",
-    properties: { cluster: false, catId: cat.uid, category: 'Cat' },
-    geometry: {
-      type: "Point",
-      coordinates: [
-        parseFloat(cat.longitude),
-        parseFloat(cat.latitude)
-      ]
-    }
-  }));
-
-  console.log('points', points);
-
-  // const mapRef = React.createRef();
-
+  
   useEffect(() => {
     const listener = e => {
       if (e.key === "Escape") {
@@ -48,13 +35,18 @@ const MapContainer = (props) => {
 
   const ref = React.createRef();
   const onLoad = () => {
-     const bounds = ref.current.getMap().getBounds().toArray().flat();
-     ref.current.getMap().fitBounds(bounds, {
+    //const bounds = ref.current.getMap().getBounds().toArray().flat();
+    let points = [];
+    props.cats.forEach(cat => (
+      points.push([ cat.lat, cat.lng ])
+    ) );
+    console.log('points', [points]);
+    ref.current.getMap().fitBounds(points, {
       padding: { top: 50, bottom: 50, left: 50, right: 50 },
       easing(t) {
           return t * (2 - t);
       },
-  });
+    });
   };
 
   return (
