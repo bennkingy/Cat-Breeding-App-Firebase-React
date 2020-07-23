@@ -10,12 +10,17 @@ const MapContainer = (props) => {
 
   console.log(props.cats);
 
+  let points = [];
+  props.cats.forEach(cat => (
+    points.push([ cat.lat, cat.lng ])
+  ) );
+
   const [viewport, setViewport] = useState({
     latitude: 51.5074,
     longitude:  0.1278,
     width: "100%",
-    height: "100vh",
-    zoom: 9
+    height: "600px",
+    zoom: 9,
   });
 
   const [selectedCat, setSelectedCat] = useState(null);
@@ -40,8 +45,9 @@ const MapContainer = (props) => {
     props.cats.forEach(cat => (
       points.push([ cat.lat, cat.lng ])
     ) );
+    console.log('points', points);
     console.log('points', [points]);
-    ref.current.getMap().fitBounds(points, {
+    points.length > 0 && ref.current.getMap().fitBounds(points, {
       padding: { top: 50, bottom: 50, left: 50, right: 50 },
       easing(t) {
           return t * (2 - t);
