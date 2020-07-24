@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import MapMarker from "./../../images/mapmarker.svg";
 
+import mapboxgl from 'mapbox-gl'
+
 const MapMarkerImage = () => (
-  <img src={MapMarker} height={40} width={40} />
+  <img src={MapMarker} height={40} width={40} alt="cat"/>
 );
 
 const MapContainer = (props) => {
@@ -13,13 +15,12 @@ const MapContainer = (props) => {
   const [selectedCat, setSelectedCat] = useState(null);
   const [viewport, setViewport] = useState({
     latitude: 51.5074,
-    longitude:  0.1278,
+    longitude:  -0.37,
     width: "100%",
     height: "600px",
     zoom: 9,
   });
 
-  
   useEffect(() => {
     const listener = e => {
       if (e.key === "Escape") {
@@ -38,13 +39,24 @@ const MapContainer = (props) => {
 
     if (props.cats.length > 0) {
 
-      const lat = props.cats.map(location => parseFloat(location.lat))
-      const lng = props.cats.map(location => parseFloat(location.lng))
+      // const lat = props.cats.map(location => parseFloat(location.lat))
+      // const lng = props.cats.map(location => parseFloat(location.lng))
 
-      const minCoords = [Math.min.apply(null, lng), Math.min.apply(null, lat)]
-      const maxCoords = [Math.max.apply(null, lng), Math.max.apply(null, lat)]
+      // const minCoords = [Math.min.apply(null, lng), Math.min.apply(null, lat)]
+      // const maxCoords = [Math.max.apply(null, lng), Math.max.apply(null, lat)]
 
-      const bounds = [minCoords, maxCoords]
+      // const bounds = [minCoords, maxCoords]
+
+
+      let points = []
+
+      props.cats.forEach(cat => (
+        points.push([ cat.lng, cat.lat ])
+      ) );
+
+      var bounds = points.reduce(function(bounds, coord) {
+        return bounds.extend(coord);
+      }, new mapboxgl.LngLatBounds(points[0], points[0]));
 
       if (mapRef) {
         mapRef.current.fitBounds(bounds, {
