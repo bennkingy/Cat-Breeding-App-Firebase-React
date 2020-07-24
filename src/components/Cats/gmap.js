@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import MapMarker from "./../../images/mapmarker.svg";
 
@@ -8,13 +8,9 @@ const MapMarkerImage = () => (
 
 const MapContainer = (props) => {
 
-  console.log(props.cats);
+  const mapRef = useRef()
 
-  let points = [];
-  props.cats.forEach(cat => (
-    points.push([ cat.lat, cat.lng ])
-  ) );
-
+  const [selectedCat, setSelectedCat] = useState(null);
   const [viewport, setViewport] = useState({
     latitude: 51.5074,
     longitude:  0.1278,
@@ -23,7 +19,6 @@ const MapContainer = (props) => {
     zoom: 9,
   });
 
-  const [selectedCat, setSelectedCat] = useState(null);
   
   useEffect(() => {
     const listener = e => {
@@ -31,28 +26,35 @@ const MapContainer = (props) => {
         setSelectedCat(null);
       }
     };
-    window.addEventListener("keydown", listener);
 
+    window.addEventListener("keydown", listener);
     return () => {
       window.removeEventListener("keydown", listener);
     };
+    
   }, []);
 
-  const ref = React.createRef();
   const onLoad = () => {
-    //const bounds = ref.current.getMap().getBounds().toArray().flat();
-    let points = [];
-    props.cats.forEach(cat => (
-      points.push([ cat.lat, cat.lng ])
-    ) );
-    console.log('points', points);
-    console.log('points', [points]);
-    points.length > 0 && ref.current.getMap().fitBounds(points, {
-      padding: { top: 50, bottom: 50, left: 50, right: 50 },
-      easing(t) {
-          return t * (2 - t);
-      },
-    });
+
+    if (props.cats.length > 0) {
+
+      const lat = props.cats.map(location => parseFloat(location.lat))
+      const lng = props.cats.map(location => parseFloat(location.lng))
+
+      const minCoords = [Math.min.apply(null, lng), Math.min.apply(null, lat)]
+      const maxCoords = [Math.max.apply(null, lng), Math.max.apply(null, lat)]
+
+      const bounds = [minCoords, maxCoords]
+
+      if (mapRef) {
+        mapRef.current.fitBounds(bounds, {
+          padding: { top: 50, bottom: 50, left: 50, right: 50 },
+          easing(t) {
+              return t * (2 - t);
+          }
+        }); 
+      }
+    }
   };
 
   return (
@@ -64,7 +66,7 @@ const MapContainer = (props) => {
         onViewportChange={viewport => {
           setViewport(viewport);
         }}
-        ref={ref}
+        ref={ref => mapRef.current = ref && ref.getMap()}
         onLoad={onLoad}
       >
 
