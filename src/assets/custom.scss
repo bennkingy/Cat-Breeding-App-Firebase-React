@@ -7,4 +7,14 @@ body {
 
 .headroom {
   box-shadow: 0 8px 12px -3px rgba(0,0,0,.15);
-} 
+}
+
+.mapContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100% !important;
+  height: 600px !important;
+}

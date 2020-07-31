@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { withFirebase } from '../Firebase';
 import MapContainer from './gmap.js';
+import MapboxGLContainer from './egmap';
 
 const CatPage = () => (
   <div>
@@ -61,9 +62,9 @@ class CatBase extends React.Component {
     return (
       <div>
         {loading && <div>Loading ...</div>}
-        {cats.length > 0 && loading == false ? (
+        {cats.length > 0 && loading === false ? (
           <div className="mapContainerboi">
-            <MapContainer cats={cats} />
+            <MapboxGLContainer cats={cats} />
           </div>
         ) : (
           <div>There are no cats</div>

@@ -14,8 +14,9 @@ const MapContainer = (props) => {
 
   const [selectedCat, setSelectedCat] = useState(null);
   const [viewport, setViewport] = useState({
-    latitude: 51.5074,
-    longitude:  -0.37,
+    center: [52, -0.49],
+    latitude: 52,
+    longitude: -0.49,
     width: "100%",
     height: "600px",
     zoom: 9,
@@ -58,16 +59,18 @@ const MapContainer = (props) => {
         return bounds.extend(coord);
       }, new mapboxgl.LngLatBounds(points[0], points[0]));
 
-      if (mapRef) {
-        mapRef.current.fitBounds(bounds, {
-          padding: { top: 50, bottom: 50, left: 50, right: 50 },
-          easing(t) {
-              return t * (2 - t);
-          }
-        }); 
-      }
+      mapRef.current.fitBounds(bounds, {
+        padding: { top: 50, bottom: 50, left: 50, right: 50 },
+        easing(t) {
+            return t * (2 - t);
+        }
+      }); 
+
     }
   };
+
+
+  console.log(viewport)
 
   return (
     <div>
