@@ -122,22 +122,21 @@ export default MapboxGLContainer;
 
 export const prepareGeoJSON = (cats) => {
   
-  const map_features = cats.reduce((agg, curr) => {
+  const map_features = cats.reduce((agg, currentCat) => {
 
     const feature = {
       'type' : 'Feature',
       'properties': {
         'description':
-          `<a href=${'/cat/'+(curr.uid).substr(1)}>
-            <img src='${curr.imageURL}'/>
-            <div className='h-48 w-48 bg-center flex-none bg-cover rounded-t text-center overflow-hidden' style=${{ backgroundImage: `url(${curr.imageURL})` }}></div>
-            <h2>${curr.text}</h2>
-            <p>${curr.description}</>
+          `<a href=${'/cat/'+(currentCat.uid).substr(1)}>
+            <div class='h-48 w-48 bg-center flex-none bg-cover rounded-t text-center overflow-hidden' style='background:url(${currentCat.imageURL});background-position: center;background-size:cover;'></div>
+            <h2><strong>${currentCat.text}</strong></h2>
+            <p>${currentCat.description}</p>
           </a>`
       },
       'geometry':{
         'type': 'Point',
-        'coordinates': [curr.lng, curr.lat]
+        'coordinates': [currentCat.lng, currentCat.lat]
       }
     }
 
