@@ -9,7 +9,7 @@ class MapboxGLContainer extends React.Component {
     this.state = {
       lat: 52,
       lng: -0.49,
-      zoom: 9,
+      zoom: 2,
     };
   }
 
@@ -29,8 +29,7 @@ class MapboxGLContainer extends React.Component {
         const cats = prepareGeoJSON(this.props.cats)
 
         map.loadImage(
-            '../images/mapmarker.svg',
-            // Add an image to use as a custom marker
+          '/mapmarker.png',            // Add an image to use as a custom marker
             function(error, image) {
                 if (error) throw error;
                 map.addImage('custom-marker', image);
@@ -97,7 +96,7 @@ class MapboxGLContainer extends React.Component {
         }, new mapboxgl.LngLatBounds(points[0], points[0]));
 
           map.fitBounds(bounds, {
-            padding: { top: 50, bottom: 50, left: 50, right: 50 },
+            padding: { top: 100, bottom: 100, left: 100, right: 100 },
             easing(t) {
                 return t * (2 - t);
             }
@@ -117,7 +116,6 @@ class MapboxGLContainer extends React.Component {
 
 export default MapboxGLContainer;
 
-
 // prepare the data as described in the map box docs link
 // https://docs.mapbox.com/mapbox-gl-js/example/popup-on-hover/
 // https://docs.mapbox.com/mapbox-gl-js/example/custom-marker-icons/
@@ -129,11 +127,13 @@ export const prepareGeoJSON = (cats) => {
     const feature = {
       'type' : 'Feature',
       'properties': {
-        'description': `<div>
-          <img src='${curr.imageURL}'/>
-          <p><strong>${curr.text}</strong></p>
-          <p>${curr.description}</>
-        </ivd>`
+        'description':
+          `<a href=${'/cat/'+(curr.uid).substr(1)}>
+            <img src='${curr.imageURL}'/>
+            <div className='h-48 w-48 bg-center flex-none bg-cover rounded-t text-center overflow-hidden' style=${{ backgroundImage: `url(${curr.imageURL})` }}></div>
+            <h2>${curr.text}</h2>
+            <p>${curr.description}</>
+          </a>`
       },
       'geometry':{
         'type': 'Point',
