@@ -62,7 +62,7 @@ class CatBase extends React.Component {
       <div>
         {loading && <div>Loading ...</div>}
         {cats.length > 0 && loading === false ? (
-          <div className="mapContainerboi">
+          <div>
             <MapboxGLContainer cats={cats} />
           </div>
         ) : (
