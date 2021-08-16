@@ -28,6 +28,8 @@ class MapboxGLContainer extends React.Component {
 
         const cats = prepareGeoJSON(this.props.cats)
 
+        console.log(this.props.cats)
+
         map.loadImage(
           '/mapmarker.png',            // Add an image to use as a custom marker
             function(error, image) {
